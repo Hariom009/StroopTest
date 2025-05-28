@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BF0F584D2DE5C5150059DEAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF0F584C2DE5C5150059DEAF /* Assets.xcassets */; };
+		BF0F58AD2DE5C6410059DEAF /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58AC2DE5C6410059DEAF /* FirebaseAI */; };
+		BF0F58AF2DE5C6410059DEAF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58AE2DE5C6410059DEAF /* FirebaseAuth */; };
+		BF0F58B12DE5C6410059DEAF /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58B02DE5C6410059DEAF /* FirebaseDatabase */; };
+		BF0F58B32DE5C6410059DEAF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58B22DE5C6410059DEAF /* FirebaseFirestore */; };
+		BF0F58B52DE5C6410059DEAF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58B42DE5C6410059DEAF /* FirebaseStorage */; };
+		BF0F58C22DE5CA4B0059DEAF /* SwiftUISpeechToText in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58C12DE5CA4B0059DEAF /* SwiftUISpeechToText */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		BF0F58532DE5C5160059DEAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -25,9 +35,27 @@
 
 /* Begin PBXFileReference section */
 		BF0F58452DE5C5140059DEAF /* StroopTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StroopTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF0F584C2DE5C5150059DEAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF0F58522DE5C5160059DEAF /* StroopTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StroopTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF0F585C2DE5C5160059DEAF /* StroopTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StroopTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BF0F58A42DE5C5610059DEAF /* Exceptions for "StroopTestTests" folder in "StroopTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				StroopTestTests.swift,
+			);
+			target = BF0F58442DE5C5140059DEAF /* StroopTest */;
+		};
+		BF0F58A52DE5C5610059DEAF /* Exceptions for "StroopTestTests" folder in "StroopTestTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				StroopTestTests.swift,
+			);
+			target = BF0F58512DE5C5160059DEAF /* StroopTestTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BF0F58472DE5C5140059DEAF /* StroopTest */ = {
@@ -35,14 +63,18 @@
 			path = StroopTest;
 			sourceTree = "<group>";
 		};
-		BF0F58552DE5C5160059DEAF /* StroopTestTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = StroopTestTests;
-			sourceTree = "<group>";
-		};
 		BF0F585F2DE5C5160059DEAF /* StroopTestUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = StroopTestUITests;
+			sourceTree = "<group>";
+		};
+		BF0F58A22DE5C5610059DEAF /* StroopTestTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BF0F58A42DE5C5610059DEAF /* Exceptions for "StroopTestTests" folder in "StroopTest" target */,
+				BF0F58A52DE5C5610059DEAF /* Exceptions for "StroopTestTests" folder in "StroopTestTests" target */,
+			);
+			path = StroopTestTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +84,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF0F58B12DE5C6410059DEAF /* FirebaseDatabase in Frameworks */,
+				BF0F58B32DE5C6410059DEAF /* FirebaseFirestore in Frameworks */,
+				BF0F58C22DE5CA4B0059DEAF /* SwiftUISpeechToText in Frameworks */,
+				BF0F58AD2DE5C6410059DEAF /* FirebaseAI in Frameworks */,
+				BF0F58B52DE5C6410059DEAF /* FirebaseStorage in Frameworks */,
+				BF0F58AF2DE5C6410059DEAF /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,8 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				BF0F58472DE5C5140059DEAF /* StroopTest */,
-				BF0F58552DE5C5160059DEAF /* StroopTestTests */,
-				BF0F585F2DE5C5160059DEAF /* StroopTestUITests */,
+				BF0F584C2DE5C5150059DEAF /* Assets.xcassets */,
 				BF0F58462DE5C5140059DEAF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,6 +122,8 @@
 		BF0F58462DE5C5140059DEAF /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				BF0F58A22DE5C5610059DEAF /* StroopTestTests */,
+				BF0F585F2DE5C5160059DEAF /* StroopTestUITests */,
 				BF0F58452DE5C5140059DEAF /* StroopTest.app */,
 				BF0F58522DE5C5160059DEAF /* StroopTestTests.xctest */,
 				BF0F585C2DE5C5160059DEAF /* StroopTestUITests.xctest */,
@@ -109,9 +148,16 @@
 			);
 			fileSystemSynchronizedGroups = (
 				BF0F58472DE5C5140059DEAF /* StroopTest */,
+				BF0F58A22DE5C5610059DEAF /* StroopTestTests */,
 			);
 			name = StroopTest;
 			packageProductDependencies = (
+				BF0F58AC2DE5C6410059DEAF /* FirebaseAI */,
+				BF0F58AE2DE5C6410059DEAF /* FirebaseAuth */,
+				BF0F58B02DE5C6410059DEAF /* FirebaseDatabase */,
+				BF0F58B22DE5C6410059DEAF /* FirebaseFirestore */,
+				BF0F58B42DE5C6410059DEAF /* FirebaseStorage */,
+				BF0F58C12DE5CA4B0059DEAF /* SwiftUISpeechToText */,
 			);
 			productName = StroopTest;
 			productReference = BF0F58452DE5C5140059DEAF /* StroopTest.app */;
@@ -129,9 +175,6 @@
 			);
 			dependencies = (
 				BF0F58542DE5C5160059DEAF /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				BF0F58552DE5C5160059DEAF /* StroopTestTests */,
 			);
 			name = StroopTestTests;
 			packageProductDependencies = (
@@ -195,6 +238,10 @@
 			);
 			mainGroup = BF0F583C2DE5C5140059DEAF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BF0F58C02DE5CA4B0059DEAF /* XCRemoteSwiftPackageReference "SwiftUISpeechToText" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BF0F58462DE5C5140059DEAF /* Products */;
 			projectDirPath = "";
@@ -212,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF0F584D2DE5C5150059DEAF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +448,8 @@
 				DEVELOPMENT_TEAM = LAP54KU2SV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +478,8 @@
 				DEVELOPMENT_TEAM = LAP54KU2SV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -558,6 +610,58 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.13.0;
+			};
+		};
+		BF0F58C02DE5CA4B0059DEAF /* XCRemoteSwiftPackageReference "SwiftUISpeechToText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pandashashwat97/SwiftUISpeechToText.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BF0F58AC2DE5C6410059DEAF /* FirebaseAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAI;
+		};
+		BF0F58AE2DE5C6410059DEAF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		BF0F58B02DE5C6410059DEAF /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		BF0F58B22DE5C6410059DEAF /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		BF0F58B42DE5C6410059DEAF /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		BF0F58C12DE5CA4B0059DEAF /* SwiftUISpeechToText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF0F58C02DE5CA4B0059DEAF /* XCRemoteSwiftPackageReference "SwiftUISpeechToText" */;
+			productName = SwiftUISpeechToText;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BF0F583D2DE5C5140059DEAF /* Project object */;
 }
