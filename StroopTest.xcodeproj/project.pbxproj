@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BF0F584D2DE5C5150059DEAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF0F584C2DE5C5150059DEAF /* Assets.xcassets */; };
-		BF0F58AD2DE5C6410059DEAF /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58AC2DE5C6410059DEAF /* FirebaseAI */; };
-		BF0F58AF2DE5C6410059DEAF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58AE2DE5C6410059DEAF /* FirebaseAuth */; };
-		BF0F58B12DE5C6410059DEAF /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58B02DE5C6410059DEAF /* FirebaseDatabase */; };
-		BF0F58B32DE5C6410059DEAF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58B22DE5C6410059DEAF /* FirebaseFirestore */; };
-		BF0F58B52DE5C6410059DEAF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58B42DE5C6410059DEAF /* FirebaseStorage */; };
 		BF0F58C22DE5CA4B0059DEAF /* SwiftUISpeechToText in Frameworks */ = {isa = PBXBuildFile; productRef = BF0F58C12DE5CA4B0059DEAF /* SwiftUISpeechToText */; };
 /* End PBXBuildFile section */
 
@@ -84,12 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF0F58B12DE5C6410059DEAF /* FirebaseDatabase in Frameworks */,
-				BF0F58B32DE5C6410059DEAF /* FirebaseFirestore in Frameworks */,
 				BF0F58C22DE5CA4B0059DEAF /* SwiftUISpeechToText in Frameworks */,
-				BF0F58AD2DE5C6410059DEAF /* FirebaseAI in Frameworks */,
-				BF0F58B52DE5C6410059DEAF /* FirebaseStorage in Frameworks */,
-				BF0F58AF2DE5C6410059DEAF /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,11 +142,6 @@
 			);
 			name = StroopTest;
 			packageProductDependencies = (
-				BF0F58AC2DE5C6410059DEAF /* FirebaseAI */,
-				BF0F58AE2DE5C6410059DEAF /* FirebaseAuth */,
-				BF0F58B02DE5C6410059DEAF /* FirebaseDatabase */,
-				BF0F58B22DE5C6410059DEAF /* FirebaseFirestore */,
-				BF0F58B42DE5C6410059DEAF /* FirebaseStorage */,
 				BF0F58C12DE5CA4B0059DEAF /* SwiftUISpeechToText */,
 			);
 			productName = StroopTest;
@@ -239,7 +224,6 @@
 			mainGroup = BF0F583C2DE5C5140059DEAF;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BF0F58C02DE5CA4B0059DEAF /* XCRemoteSwiftPackageReference "SwiftUISpeechToText" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -612,14 +596,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.13.0;
-			};
-		};
 		BF0F58C02DE5CA4B0059DEAF /* XCRemoteSwiftPackageReference "SwiftUISpeechToText" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pandashashwat97/SwiftUISpeechToText.git";
@@ -631,31 +607,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BF0F58AC2DE5C6410059DEAF /* FirebaseAI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAI;
-		};
-		BF0F58AE2DE5C6410059DEAF /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		BF0F58B02DE5C6410059DEAF /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		BF0F58B22DE5C6410059DEAF /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		BF0F58B42DE5C6410059DEAF /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF0F58AB2DE5C6410059DEAF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
 		BF0F58C12DE5CA4B0059DEAF /* SwiftUISpeechToText */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BF0F58C02DE5CA4B0059DEAF /* XCRemoteSwiftPackageReference "SwiftUISpeechToText" */;
