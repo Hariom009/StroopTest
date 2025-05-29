@@ -65,9 +65,3 @@ struct TestReportView: View {
         }
     }
 }
-
-
-#Preview {
-    TestReportView(reportOpacity: .constant(0), totalQuestions: .constant(0), animatedCorrect: .constant(0), animatedWrong: .constant(0), reportScale: .constant(0.8))
-        .preferredColorScheme(.dark)
-}

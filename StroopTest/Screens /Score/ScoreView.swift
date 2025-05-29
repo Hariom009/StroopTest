@@ -20,6 +20,13 @@ struct ScoreView: View {
     @State private var backgroundGradientOpacity: Double = 0
     @State private var particleAnimation = false
     @State private var glowEffect = false
+    @State private var showStartTest = false
+    @State private var AlertForRetake = false
+    @State private var showHomeView = false
+    @State private var countDownTimer = 14
+    // NEW: share-sheet state
+    @State private var showShareSheet = false
+    @State private var reportImage: UIImage?
     
     // Computed property for wrong answers
     private var wrongAnswers: Int {
@@ -29,87 +36,15 @@ struct ScoreView: View {
     var body: some View {
         ZStack {
             // Animated background gradient
-            LinearGradient(
-                colors: [
-                    Color.purple.opacity(0.1),
-                    Color.blue.opacity(0.1),
-                    Color.black
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .opacity(backgroundGradientOpacity)
-            .ignoresSafeArea()
-            
-            // Floating particles effect
-            ForEach(0..<20, id: \.self) { index in
-                Circle()
-                    .fill(
-                        LinearGradient(
-                            colors: [.blue, .purple, .cyan],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .frame(width: CGFloat.random(in: 2...6))
-                    .position(
-                        x: CGFloat.random(in: 50...350),
-                        y: particleAnimation ? CGFloat.random(in: 100...700) : CGFloat.random(in: 200...600)
-                    )
-                    .opacity(particleAnimation ? 0.8 : 0.3)
-                    .animation(
-                        .linear(duration: Double.random(in: 3...6))
-                        .repeatForever(autoreverses: true)
-                        .delay(Double.random(in: 0...2)),
-                        value: particleAnimation
-                    )
-            }
+            LiveBackgroundView(backgroundGradientOpacity: $backgroundGradientOpacity, particleAnimation: $particleAnimation)
             
             ScrollView {
                 VStack(spacing: 35) {
                     // Celebration emoji with bounce effect
-                    Text("🎉")
-                        .font(.system(size: 100))
-                        .scaleEffect(celebrationScale)
-                        .shadow(color: .yellow.opacity(0.8), radius: glowEffect ? 20 : 5)
-                        .animation(
-                            .spring(response: 0.8, dampingFraction: 0.6, blendDuration: 0.3),
-                            value: celebrationScale
-                        )
-                        .animation(
-                            .easeInOut(duration: 2)
-                            .repeatForever(autoreverses: true),
-                            value: glowEffect
-                        )
+                    GlowingEmojiView(text: "🎉", celebrationScale: $celebrationScale, glowEffect: $glowEffect)
                     
                     // Title with typewriter effect
-                    VStack(spacing: 20) {
-                        Text("Stroop Test Complete!")
-                            .font(.system(size: 28, weight: .bold, design: .rounded))
-                            .foregroundStyle(
-                                LinearGradient(
-                                    colors: [.white, .cyan, .blue],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .opacity(titleOpacity)
-                            .shadow(color: .blue.opacity(0.5), radius: 10)
-                            .multilineTextAlignment(.center)
-                        
-                        // Decorative line
-                        Rectangle()
-                            .fill(
-                                LinearGradient(
-                                    colors: [.clear, .blue, .purple, .clear],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .frame(height: 2)
-                            .frame(maxWidth: titleOpacity > 0 ? 250 : 0)
-                            .animation(.easeInOut(duration: 1).delay(0.5), value: titleOpacity)
-                    }
+                    GradientTextView(text: "Stroop Test Complete!", titleOpacity: $titleOpacity)
                     
                     // Score display with counter animation
                     VStack(spacing: 15) {
@@ -158,18 +93,66 @@ struct ScoreView: View {
                         }
                         .opacity(scoreOpacity)
                     }
-                   // Test Report Here...
+                    // Test Report Here...
                     TestReportView(reportOpacity: $reportOpacity, totalQuestions: $totalQuestions, animatedCorrect: $animatedCorrect, animatedWrong: $animatedWrong, reportScale: $reportScale)
-                    .padding(.horizontal)
+                        .padding(.horizontal)
                     
+                    HStack(spacing: 70){
+                        Button{
+                            AlertForRetake = true
+                        }label:{
+                            ButtonLablegradient(buttonName: "Retake test", systemimage: "repeat")
+                        }
+                        Button(action: {
+                            reportImage = snapshot()
+                            showShareSheet = true
+                        }) {
+                            ButtonLablegradient(buttonName: "Share Report", systemimage: "square.and.arrow.up")
+                        }
+                    }
+                    .padding()
+                    .opacity(scoreOpacity)
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 30)
+            }
+            .scrollIndicators(.hidden)
+            .overlay {
+                if AlertForRetake {
+                    CountdownAlertView(
+                        isPresented: $AlertForRetake,
+                        showStartTest: $showStartTest,
+                        countDownTimer: $countDownTimer
+                    )
+                }
+            }
+        }
+        .onChange(of: showStartTest) { newValue,_ in
+            if newValue {
+                // Navigate to start test screen or whatever action you need
+                showHomeView = true
+                showStartTest = false // Reset the state
             }
         }
         .onAppear {
             startAnimationSequence()
         }
+        // 3. Present the system share sheet
+        .sheet(isPresented: $showShareSheet) {
+            if let image = reportImage {
+                ActivityView(activityItems: [image], isPresented: $showShareSheet)
+                    .edgesIgnoringSafeArea(.all)
+            } else {
+                Text("Press Share report again your report is ready to share.")
+            }
+        }
+        .fullScreenCover(isPresented: $showHomeView){
+            StartTest()
+        }
+    }
+    
+    private func snapshot() -> UIImage {
+        return body.snapshot()
     }
     
     private func startAnimationSequence() {
@@ -270,30 +253,30 @@ struct ScoreView: View {
     
     private func getPerformanceText() -> String {
         switch score {
-        case 90...100: return "Excellent!"
-        case 80..<90: return "Great!"
-        case 70..<80: return "Good"
-        case 60..<70: return "Fair"
+        case 60...180: return "Excellent!"
+        case 45..<60: return "Great!"
+        case 20..<45: return "Good"
+        case 10..<20: return "Fair"
         default: return "Keep Trying!"
         }
     }
     
     private func getPerformanceColor() -> Color {
         switch score {
-        case 90...100: return .green
-        case 80..<90: return .blue
-        case 70..<80: return .orange
-        case 60..<70: return .yellow
+        case 60...180: return .green
+        case 45..<60: return .blue
+        case 20..<45: return .orange
+        case 10..<20: return .yellow
         default: return .red
         }
     }
     
     private func getPerformanceDescription() -> String {
         switch score {
-        case 90...100: return "Outstanding performance! Excellent cognitive flexibility."
-        case 80..<90: return "Well done! Good attention control."
-        case 70..<80: return "Nice work! Room for improvement."
-        case 50..<70: return "Keep control over your screen time."
+        case 60...180: return "Outstanding performance! Excellent cognitive flexibility."
+        case 45..<60: return "Well done! Good attention control."
+        case 20..<45: return "Nice work! Room for improvement."
+        case 10..<20: return "Keep control over your screen time."
         default: return "Use ridan effieciently & keep control of social media!"
         }
     }
