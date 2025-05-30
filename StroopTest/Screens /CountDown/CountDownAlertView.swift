@@ -23,13 +23,13 @@ struct CountdownAlertView: View {
             
             // Alert content
             VStack(spacing: 20) {
-                Text("Buy Premium")
+                Text("Limit Reached!")
                     .font(.headline)
                     .fontWeight(.bold)
                 
                 VStack(spacing: 10) {
                     Text("In free version you can attempt this test once every 14 days")
-                        .font(.system(size: 12))
+                        .font(.system(size: 10))
                         .multilineTextAlignment(.center)
                     
                     if timeRemaining > 0 {
@@ -40,7 +40,7 @@ struct CountdownAlertView: View {
                             .padding(.vertical, 8)
                     } else {
                         Text("You can attempt the test for free now")
-                            .font(.system(.title3))
+                            .font(.system(size: 13))
                             .fontWeight(.semibold)
                             .foregroundColor(.green)
                             .padding(.vertical, 8)
@@ -49,14 +49,14 @@ struct CountdownAlertView: View {
                 
                 HStack(spacing: 15) {
                     if timeRemaining <= 0 {
-                        Button("Start Test") {
+                        Button("Attempt Test") {
                             showStartTest = true
                             isPresented = false
                         }
                         .buttonStyle(.borderedProminent)
                     }
                     
-                    Button("Dismiss") {
+                    Button("Buy Premium") {
                         isPresented = false
                     }
                     .buttonStyle(.bordered)
@@ -116,12 +116,15 @@ struct CountdownAlertView: View {
     }
     
     private func formatTimeRemaining() -> String {
-        let days = Int(timeRemaining) / (24 * 3600)
-        let hours = (Int(timeRemaining) % (24 * 3600)) / 3600
-        let minutes = (Int(timeRemaining) % 3600) / 60
-        let seconds = Int(timeRemaining) % 60
+        let day = Int(timeRemaining) / (24 * 3600)
+        let hr = (Int(timeRemaining) % (24 * 3600)) / 3600
+        let min = (Int(timeRemaining) % 3600) / 60
+        let sec = Int(timeRemaining) % 60
         
-        return "\(days) days \(hours) hr \(minutes) min \(seconds) sec"
+        return "\(day) day \(hr) hr \(min) min \(sec) sec"
     }
 }
 
+#Preview {
+    CountdownAlertView(isPresented: .constant(true), showStartTest: .constant(false), countDownTimer: .constant(0))
+}

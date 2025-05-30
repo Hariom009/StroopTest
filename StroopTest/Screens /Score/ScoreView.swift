@@ -104,10 +104,23 @@ struct ScoreView: View {
                             ButtonLablegradient(buttonName: "Retake test", systemimage: "repeat")
                         }
                         Button(action: {
-                            reportImage = snapshot()
-                            showShareSheet = true
+                            // Take Report in this button...
                         }) {
-                            ButtonLablegradient(buttonName: "Share Report", systemimage: "square.and.arrow.up")
+                            Label("Share Report", systemImage: "square.and.arrow.up")
+                                .font(.system(size: 10))
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 20)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 18)
+                                        .fill(
+                                            LinearGradient(
+                                                colors: [.black],
+                                                startPoint: .leading,
+                                                endPoint: .trailing
+                                            )
+                                        )
+                                )
+                                .foregroundColor(.white)
                         }
                     }
                     .padding()
@@ -137,22 +150,9 @@ struct ScoreView: View {
         .onAppear {
             startAnimationSequence()
         }
-        // 3. Present the system share sheet
-        .sheet(isPresented: $showShareSheet) {
-            if let image = reportImage {
-                ActivityView(activityItems: [image], isPresented: $showShareSheet)
-                    .edgesIgnoringSafeArea(.all)
-            } else {
-                Text("Press Share report again your report is ready to share.")
-            }
-        }
         .fullScreenCover(isPresented: $showHomeView){
             StartTest()
         }
-    }
-    
-    private func snapshot() -> UIImage {
-        return body.snapshot()
     }
     
     private func startAnimationSequence() {
