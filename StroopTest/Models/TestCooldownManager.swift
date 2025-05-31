@@ -1,14 +1,14 @@
 
 import Foundation
 // Complete TestCooldownManager for background persistence
-class TestCooldownManager {
+class TestCooldownManager: ObservableObject {
     static let shared = TestCooldownManager()
     
     private let cooldownDuration: TimeInterval = 14 * 24 * 60 * 60 // 14 days in seconds
     private let lastTestDateKey = "lastTestCompletionDate"
     private let cooldownEndDateKey = "cooldownEndDate"
     
-    private init() {}
+     init() {}
     
     // Call this when user completes a test
     func recordTestCompletion() {

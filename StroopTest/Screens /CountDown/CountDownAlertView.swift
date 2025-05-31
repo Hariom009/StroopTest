@@ -23,16 +23,17 @@ struct CountdownAlertView: View {
             
             // Alert content
             VStack(spacing: 20) {
-                Text("Limit Reached!")
+                
+                Text(timeRemaining > 0 ? "Limit Reached!" : "Grab your free Attempt!")
                     .font(.headline)
                     .fontWeight(.bold)
                 
                 VStack(spacing: 10) {
+                    if timeRemaining > 0 {
                     Text("In free version you can attempt this test once every 14 days")
                         .font(.system(size: 10))
                         .multilineTextAlignment(.center)
                     
-                    if timeRemaining > 0 {
                         Text(formatTimeRemaining())
                             .font(.system(.caption, design: .monospaced))
                             .fontWeight(.semibold)
@@ -76,6 +77,9 @@ struct CountdownAlertView: View {
         }
         .onDisappear {
             stopTimer()
+        }
+        .fullScreenCover(isPresented: $showStartTest){
+            UpgradedStartView()
         }
     }
     

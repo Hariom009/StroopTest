@@ -155,7 +155,7 @@ struct ScoreView: View {
             generator.notificationOccurred(.success)
         }
         .fullScreenCover(isPresented: $showHomeView){
-            StartTest()
+           UpgradedStartView()
         }
     }
     

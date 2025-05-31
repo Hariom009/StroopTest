@@ -47,7 +47,7 @@ struct Timer: View {
     
     // MARK: - Computed Properties
     private var canReset: Bool {
-        !isRunning && (timeRemaining < 45 || isFinished)
+        !isRunning && (timeRemaining < 30 || isFinished)
     }
     
     private var timerColor: Color {
@@ -58,7 +58,7 @@ struct Timer: View {
         } else if timeRemaining <= 20 {
             return .yellow
         } else {
-            return isRunning ? .primary : .secondary
+            return isRunning ? .white : .gray
         }
     }
     

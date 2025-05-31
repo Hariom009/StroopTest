@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UpgradedStartView: View {
     let stroopviewColor = Color(red: 30.0 / 255.0, green: 0.0 / 255.0, blue: 36.0 / 255.0)
+    @StateObject var TestCoolDown = TestCooldownManager()
     @State private var showTest = false
     @State private var countdown: Int? = nil
     @State private var animateCards = false
@@ -258,6 +259,7 @@ struct UpgradedStartView: View {
             withAnimation(.spring(response: 1.5, dampingFraction: 0.8)) {
                 animateCards = true
             }
+            TestCooldownManager.shared.startNewCooldown()
             floatingOffset = -20
             pulseScale = 1.05
             textShimmer = true
