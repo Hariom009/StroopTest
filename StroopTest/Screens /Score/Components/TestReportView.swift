@@ -29,14 +29,13 @@ struct TestReportView: View {
                     .opacity(reportOpacity)
                 Spacer()
             }
-            
             LazyVGrid(
                 columns: [
-                    GridItem(.flexible(), spacing: 5),
-                    GridItem(.flexible(), spacing: 5),
-                    GridItem(.flexible(), spacing: 5)
+                    GridItem(.flexible(), spacing: 1),
+                    GridItem(.flexible(), spacing: 1),
+                    GridItem(.flexible(), spacing: 1)
                 ],
-                spacing: 10               // row spacing
+                spacing: 2
             ) {
                 StatCard(
                     icon: "questionmark.circle.fill",
@@ -64,4 +63,9 @@ struct TestReportView: View {
             .opacity(reportOpacity)
         }
     }
+}
+
+#Preview{
+    TestReportView(reportOpacity: .constant(0.8), totalQuestions: .constant(10), animatedCorrect: .constant(10), animatedWrong: .constant(5), reportScale: .constant(1))
+        .preferredColorScheme(.dark)
 }

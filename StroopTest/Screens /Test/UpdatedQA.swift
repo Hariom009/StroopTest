@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftUISpeechToText
 import CoreHaptics
 
-struct QA: View {
+struct UpdatedQA: View {
     // Your source data
     @Environment(\.dismiss) private var dismiss
     let colourNames = ["Red","Blue","Yellow","Green","Purple","Orange","Pink","Maroon","White","Grey","Violet","SkyBlue", "Cyan", "Beige","Brown"]
@@ -25,6 +25,10 @@ struct QA: View {
     @State private var isProcessingAnswer = false
     @State private var showEvaluation = false
     @StateObject var speechRecognizer = SpeechRecognizer()
+    @State  var NotificationfeedbackGenerator = UINotificationFeedbackGenerator()
+    
+    // New timer for auto-advance
+    @State private var questionTask: Task<Void, Never>?
     
     @GestureState private var dragOffset: CGSize = .zero
     
@@ -100,13 +104,38 @@ struct QA: View {
                 if finished && isRecording {
                     isRecording = false
                     speechRecognizer.stopTranscribing()
+                    stopQuestionTimer()
                 }
             }
         }
         .onAppear {
             loadNewQuestion()
         }
+        .onDisappear {
+            stopQuestionTimer()
+        }
     }
+    
+    // MARK: — Start question timer
+    private func startQuestionTimer() {
+        stopQuestionTimer() // Stop any existing task
+        
+        questionTask = Task {
+            try? await Task.sleep(nanoseconds: 1_800_000_000) // 1.8 seconds
+            if !Task.isCancelled && !isFinished && !isProcessingAnswer {
+                await MainActor.run {
+                    loadNewQuestion()
+                }
+            }
+        }
+    }
+    
+    // MARK: — Stop question timer
+    private func stopQuestionTimer() {
+        questionTask?.cancel()
+        questionTask = nil
+    }
+    
     // MARK: — Check if spoken text contains a color name
     private func checkForColorName(in transcript: String) {
         guard isRecording && !isProcessingAnswer && !isFinished else { return }
@@ -134,11 +163,15 @@ struct QA: View {
         recordedResponse = ""
         isProcessingAnswer = false
         totalQuestion += 1
+        
         // Start recording for new question
         isRecording = true
         if isRecording {
             speechRecognizer.transcribe()
         }
+        
+        // Start the 1.5 second timer for auto-advance
+        startQuestionTimer()
     }
     
     // MARK: — Process the answer and move to next question
@@ -146,6 +179,9 @@ struct QA: View {
         guard !isProcessingAnswer && !isFinished else { return }
         isProcessingAnswer = true
         isRecording = false
+        
+        // Stop the question timer since user responded
+        stopQuestionTimer()
         
         // Stop speech recognition
         speechRecognizer.stopTranscribing()
@@ -169,11 +205,14 @@ struct QA: View {
         
         if response == displayedInkName.lowercased() {
             score += 5
-            correctQuestion += 1 
+            correctQuestion += 1
+            NotificationfeedbackGenerator.notificationOccurred(.success)
+        }else {
+            NotificationfeedbackGenerator.notificationOccurred(.error)
         }
     }
 }
 
 #Preview {
-    QA()
+    UpdatedQA()
 }

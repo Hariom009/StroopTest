@@ -1,4 +1,6 @@
 import SwiftUI
+import UIKit
+
 
 struct ScoreView: View {
     @Environment(\.dismiss) private var dismiss
@@ -98,11 +100,6 @@ struct ScoreView: View {
                         .padding(.horizontal)
                     
                     HStack(spacing: 70){
-                        Button{
-                            AlertForRetake = true
-                        }label:{
-                            ButtonLablegradient(buttonName: "Retake test", systemimage: "repeat")
-                        }
                         Button(action: {
                             // Take Report in this button...
                         }) {
@@ -121,6 +118,11 @@ struct ScoreView: View {
                                         )
                                 )
                                 .foregroundColor(.white)
+                        }
+                        Button{
+                            AlertForRetake = true
+                        }label:{
+                            ButtonLablegradient(buttonName: "Retake test", systemimage: "repeat")
                         }
                     }
                     .padding()
@@ -149,6 +151,8 @@ struct ScoreView: View {
         }
         .onAppear {
             startAnimationSequence()
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
         }
         .fullScreenCover(isPresented: $showHomeView){
             StartTest()
@@ -265,8 +269,8 @@ struct ScoreView: View {
         switch score {
         case 60...180: return .green
         case 45..<60: return .blue
-        case 20..<45: return .orange
-        case 10..<20: return .yellow
+        case 30..<45: return .orange
+        case 20..<30: return .yellow
         default: return .red
         }
     }
@@ -275,8 +279,8 @@ struct ScoreView: View {
         switch score {
         case 60...180: return "Outstanding performance! Excellent cognitive flexibility."
         case 45..<60: return "Well done! Good attention control."
-        case 20..<45: return "Nice work! Room for improvement."
-        case 10..<20: return "Keep control over your screen time."
+        case 30..<45: return "Nice work! Room for improvement."
+        case 20..<30: return "Keep control over your screen time."
         default: return "Use ridan effieciently & keep control of social media!"
         }
     }

@@ -145,31 +145,32 @@ struct UpgradedStartView: View {
                         // Minimalist info cards
                         MinimalCard(
                             number: "01",
-                            title: "Cognitive Assessment",
+                            title: "About Test",
                             description: "Measure attention control and mental flexibility through color-word interference tasks.",
                             delay: 0.4
                         )
                         
                         MinimalCard(
                             number: "02",
-                            title: "Response Protocol",
-                            description: "Identify text color, not the word. Rapid responses reveal cognitive processing speed.",
+                            title: "Rules",
+                            description: "1. Quickly say the color of the ink, not the written word.\n2. Words can either match the ink color or differ, increasing difficulty.\n3. Speed and accuracy are measured to assess cognitive control and attention flexibility.",
                             delay: 0.6
                         )
                         
+                       
                         MinimalCard(
                             number: "03",
-                            title: "Executive Function",
-                            description: "Assess brain's ability to suppress automatic responses and maintain focus.",
-                            delay: 0.8
-                        )
-                        
-                        MinimalCard(
-                            number: "04",
                             title: "Voice Input",
                             description: "Speak color names clearly using the microphone for accurate response capture.",
-                            delay: 1.0
+                            delay: 0.8
                         )
+                        MinimalCard(
+                            number: "04",
+                            title: "Executive Function",
+                            description: "Assess brain's ability to suppress automatic responses and maintain focus.",
+                            delay: 1
+                        )
+                        
                     }
                     .padding(.horizontal, 24)
                 }
@@ -263,18 +264,22 @@ struct UpgradedStartView: View {
             animateButton = true
         }
         .fullScreenCover(isPresented: $showTest) {
-            QA()
+            UpdatedQA()
         }
     }
     
     private func startCountdown() {
         countdown = 3
-        
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+        feedbackGenerator.prepare()
+
         Task {
             while let current = countdown, current > 0 {
+                feedbackGenerator.impactOccurred() // 🌟 Trigger vibration
                 try await Task.sleep(nanoseconds: 1_000_000_000)
                 countdown! -= 1
             }
+            
             try? await Task.sleep(nanoseconds: 500_000_000)
             countdown = nil
             showTest = true
