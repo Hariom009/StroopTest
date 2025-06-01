@@ -149,6 +149,7 @@ struct UpdatedQA: View {
             if cleanTranscript.contains(colorName) {
                 recordedResponse = colorName
                 processAnswer()
+                NotificationfeedbackGenerator.notificationOccurred(.success)
                 break
             }
         }
@@ -163,6 +164,7 @@ struct UpdatedQA: View {
         recordedResponse = ""
         isProcessingAnswer = false
         totalQuestion += 1
+        
         
         // Start recording for new question
         isRecording = true

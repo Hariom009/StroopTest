@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import SwiftData
 
 
 struct ScoreView: View {
@@ -7,6 +8,7 @@ struct ScoreView: View {
     @Binding var score: Int
     @Binding var totalQuestions: Int
     @Binding var correctAnswers: Int
+    @Environment(\.modelContext) var modelContext
     
     @State private var celebrationScale: CGFloat = 0.1
     @State private var titleOpacity: Double = 0
@@ -26,6 +28,7 @@ struct ScoreView: View {
     @State private var AlertForRetake = false
     @State private var showHomeView = false
     @State private var countDownTimer = 14
+    @State private var showTestHistory:Bool = false
     // NEW: share-sheet state
     @State private var showShareSheet = false
     @State private var reportImage: UIImage?
@@ -124,6 +127,11 @@ struct ScoreView: View {
                         }label:{
                             ButtonLablegradient(buttonName: "Retake test", systemimage: "repeat")
                         }
+                        Button{
+                            showTestHistory = true
+                        }label: {
+                            Image(systemName: "list.bullet")
+                        }
                     }
                     .padding()
                     .opacity(scoreOpacity)
@@ -151,11 +159,15 @@ struct ScoreView: View {
         }
         .onAppear {
             startAnimationSequence()
+            UpdateTestRecords()
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.success)
         }
         .fullScreenCover(isPresented: $showHomeView){
            UpgradedStartView()
+        }
+        .sheet(isPresented: $showTestHistory){
+            TestHistory()
         }
     }
     
@@ -283,6 +295,11 @@ struct ScoreView: View {
         case 20..<30: return "Keep control over your screen time."
         default: return "Use ridan effieciently & keep control of social media!"
         }
+    }
+    func UpdateTestRecords() {
+        let newTest = Score(number: score, TestDate: Date.now)
+        modelContext.insert(newTest)
+        try? modelContext.save()
     }
 }
 

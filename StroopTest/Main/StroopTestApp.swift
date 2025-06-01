@@ -7,6 +7,8 @@
 
 import SwiftUI
 import UIKit
+import SwiftData
+
 @main
 struct StroopTestApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -15,5 +17,6 @@ struct StroopTestApp: App {
             ContentView()
                 .preferredColorScheme(.dark)
         }
+        .modelContainer(for: [Score.self])
     }
 }
