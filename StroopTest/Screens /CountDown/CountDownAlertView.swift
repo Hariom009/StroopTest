@@ -8,6 +8,7 @@ struct CountdownAlertView: View {
     @State private var timerTask: Task<Void, Never>? = nil
     @Binding var showStartTest: Bool
     @Binding var countDownTimer: Int
+    @Environment(\.dismiss) var dismiss
     
     init(isPresented: Binding<Bool>, showStartTest: Binding<Bool>, countDownTimer: Binding<Int>) {
         self._isPresented = isPresented
@@ -30,10 +31,10 @@ struct CountdownAlertView: View {
                 
                 VStack(spacing: 10) {
                     if timeRemaining > 0 {
-                    Text("In free version you can attempt this test once every 14 days")
-                        .font(.system(size: 10))
-                        .multilineTextAlignment(.center)
-                    
+                        Text("In free version you can attempt this test once every 14 days")
+                            .font(.system(size: 10))
+                            .multilineTextAlignment(.center)
+                        
                         Text(formatTimeRemaining())
                             .font(.system(.caption, design: .monospaced))
                             .fontWeight(.semibold)
@@ -55,6 +56,12 @@ struct CountdownAlertView: View {
                             isPresented = false
                         }
                         .buttonStyle(.borderedProminent)
+                    }else{
+                        Button{
+                            dismiss()
+                        }label: {
+                          Text("Cancel")
+                        }
                     }
                     
                     Button("Buy Premium") {

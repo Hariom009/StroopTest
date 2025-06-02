@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AVFAudio
+import Speech
 
 struct UpgradedStartView: View {
     let stroopviewColor = Color(red: 30.0 / 255.0, green: 0.0 / 255.0, blue: 36.0 / 255.0)
@@ -21,7 +23,9 @@ struct UpgradedStartView: View {
     @State var RetakeAlert = false
     @State var CountDownTimer = 0
     @State var startTest = false
-  //  @State var
+    @State private var permissionDenied = false
+    @State private var permissionGranted = false
+
     
     var body: some View {
         ZStack {
@@ -163,7 +167,7 @@ struct UpgradedStartView: View {
                             delay: 0.6
                         )
                         
-                       
+                        
                         MinimalCard(
                             number: "03",
                             title: "Voice Input",
@@ -184,7 +188,14 @@ struct UpgradedStartView: View {
                 
                 // Ultra-minimal start button
                 Button {
-                    startCountdown()
+                    Task {
+                          let granted = await requestMicAndSpeechPermissions()
+                          if granted {
+                              startCountdown()
+                          } else {
+                              permissionDenied = true
+                          }
+                      }
                 } label: {
                     HStack(spacing: 8) {
                         Circle()
@@ -270,7 +281,7 @@ struct UpgradedStartView: View {
             textShimmer = true
             animateButton = true
         }
-        .fullScreenCover(isPresented: $showTest) {
+        .fullScreenCover(isPresented: $showTest){
             let timerRemain = TestCooldownManager.shared.getRemainingTime()
             if timerRemain == 0 {
                 UpdatedQA(TestCoolDown: TestCoolDown)
@@ -278,13 +289,24 @@ struct UpgradedStartView: View {
                 CountdownAlertView(isPresented: $RetakeAlert, showStartTest:$startTest, countDownTimer: $CountDownTimer)
             }
         }
+        .alert("Permission Denied", isPresented: $permissionDenied) {
+            Button("OK", role: .cancel) { }
+            Button("Settings") {
+                if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(settingsURL)
+                }
+            }
+        } message: {
+            Text("Please enable microphone and speech recognition access in Settings to proceed with the test.")
+        }
+
     }
     
     private func startCountdown() {
         countdown = 3
         let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
         feedbackGenerator.prepare()
-
+        
         Task {
             while let current = countdown, current > 0 {
                 feedbackGenerator.impactOccurred() // 🌟 Trigger vibration
@@ -297,6 +319,22 @@ struct UpgradedStartView: View {
             showTest = true
         }
     }
+    func requestMicAndSpeechPermissions() async -> Bool {
+        let micPermission = await withCheckedContinuation { continuation in
+            AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                continuation.resume(returning: granted)
+            }
+        }
+        
+        let speechPermission = await withCheckedContinuation { continuation in
+            SFSpeechRecognizer.requestAuthorization { status in
+                continuation.resume(returning: status == .authorized)
+            }
+        }
+        
+        return micPermission && speechPermission
+    }
+    
 }
 #Preview {
     UpgradedStartView()
