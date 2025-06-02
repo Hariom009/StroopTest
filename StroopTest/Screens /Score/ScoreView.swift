@@ -104,9 +104,9 @@ struct ScoreView: View {
                     
                     HStack(spacing: 70){
                         Button(action: {
-                            // Take Report in this button...
+                            showTestHistory = true
                         }) {
-                            Label("Share Report", systemImage: "square.and.arrow.up")
+                            Label("Test History", systemImage: "list.bullet")
                                 .font(.system(size: 10))
                                 .padding(.vertical, 10)
                                 .padding(.horizontal, 20)
@@ -126,11 +126,6 @@ struct ScoreView: View {
                             AlertForRetake = true
                         }label:{
                             ButtonLablegradient(buttonName: "Retake test", systemimage: "repeat")
-                        }
-                        Button{
-                            showTestHistory = true
-                        }label: {
-                            Image(systemName: "list.bullet")
                         }
                     }
                     .padding()

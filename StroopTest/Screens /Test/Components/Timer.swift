@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Timer: View {
-    @State private var timeRemaining: Int = 3
+    @State private var timeRemaining: Int = 30
     @State private var isRunning = false
     @State private var timerTask: Task<(), Never>? = nil
     @Binding var isFinished:Bool

@@ -17,6 +17,11 @@ struct UpgradedStartView: View {
     @State private var floatingOffset: CGFloat = 0
     @State private var pulseScale: CGFloat = 1.0
     @State private var textShimmer = false
+    // Prevent from Taking test in free ...
+    @State var RetakeAlert = false
+    @State var CountDownTimer = 0
+    @State var startTest = false
+  //  @State var
     
     var body: some View {
         ZStack {
@@ -259,14 +264,19 @@ struct UpgradedStartView: View {
             withAnimation(.spring(response: 1.5, dampingFraction: 0.8)) {
                 animateCards = true
             }
-            TestCooldownManager.shared.startNewCooldown()
+            //TestCooldownManager.shared.startNewCooldown()
             floatingOffset = -20
             pulseScale = 1.05
             textShimmer = true
             animateButton = true
         }
         .fullScreenCover(isPresented: $showTest) {
-            UpdatedQA()
+            let timerRemain = TestCooldownManager.shared.getRemainingTime()
+            if timerRemain == 0 {
+                UpdatedQA(TestCoolDown: TestCoolDown)
+            }else{
+                CountdownAlertView(isPresented: $RetakeAlert, showStartTest:$startTest, countDownTimer: $CountDownTimer)
+            }
         }
     }
     

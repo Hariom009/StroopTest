@@ -101,9 +101,9 @@ struct StartTest: View {
             }
         }
         .animation(.easeInOut(duration: 0.5), value: countdown)
-        .fullScreenCover(isPresented: $showTest) {
-            QA()
-        }
+//        .fullScreenCover(isPresented: $showTest) {
+//            QA(TestCoolDown: )
+//        }
     }
     
     private func startCountdown() {

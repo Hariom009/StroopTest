@@ -5,6 +5,7 @@ import CoreHaptics
 struct UpdatedQA: View {
     // Your source data
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var TestCoolDown: TestCooldownManager
     let colourNames = ["Red","Blue","Yellow","Green","Purple","Orange","Pink","Maroon","White","Grey","Violet","SkyBlue", "Cyan", "Beige","Brown"]
     let colours: [String: Color] = [
         "red": .red,    "blue": .blue,"yellow": .yellow,
@@ -110,6 +111,7 @@ struct UpdatedQA: View {
         }
         .onAppear {
             loadNewQuestion()
+            TestCoolDown.startNewCooldown()
         }
         .onDisappear {
             stopQuestionTimer()
@@ -216,5 +218,5 @@ struct UpdatedQA: View {
 }
 
 #Preview {
-    UpdatedQA()
+    UpdatedQA(TestCoolDown: TestCooldownManager())
 }
