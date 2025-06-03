@@ -56,14 +56,7 @@ struct CountdownAlertView: View {
                             isPresented = false
                         }
                         .buttonStyle(.borderedProminent)
-                    }else{
-                        Button{
-                            dismiss()
-                        }label: {
-                          Text("Cancel")
-                        }
                     }
-                    
                     Button("Buy Premium") {
                         isPresented = false
                     }

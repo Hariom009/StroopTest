@@ -155,29 +155,29 @@ struct UpgradedStartView: View {
                         // Minimalist info cards
                         MinimalCard(
                             number: "01",
-                            title: "About Test",
-                            description: "Measure attention control and mental flexibility through color-word interference tasks.",
+                            title: "Input",
+                            description: "Just speak the colour of text appears on screen.",
                             delay: 0.4
                         )
                         
                         MinimalCard(
                             number: "02",
                             title: "Rules",
-                            description: "1. Quickly say the color of the ink, not the written word.\n2. Words can either match the ink color or differ, increasing difficulty.\n3. Speed and accuracy are measured to assess cognitive control and attention flexibility.",
+                            description: "Quickly say the color of the word and do it quickly.",
                             delay: 0.6
                         )
                         
                         
                         MinimalCard(
                             number: "03",
-                            title: "Voice Input",
-                            description: "Speak color names clearly using the microphone for accurate response capture.",
+                            title: "Colours",
+                            description: "Red,Blue,Yellow,Green,Purple,Orange,Pink,Maroon,White,Grey,Violet,SkyBlue",
                             delay: 0.8
                         )
                         MinimalCard(
                             number: "04",
-                            title: "Executive Function",
-                            description: "Assess brain's ability to suppress automatic responses and maintain focus.",
+                            title: "About",
+                            description: "This attention test is based on the Stroop test.",
                             delay: 1
                         )
                         

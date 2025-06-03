@@ -43,6 +43,7 @@ struct TestHistory: View {
                 }
                 .padding(.bottom, 100)
             }
+            .scrollIndicators(.hidden)
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
